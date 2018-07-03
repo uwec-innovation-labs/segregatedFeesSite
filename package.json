@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/UWEC-ITC/segregatedFeesSite/issues"
   },
-  "homepage": "https://github.com/UWEC-ITC/segregatedFeesSite#readme"
+  "homepage": "https://github.com/UWEC-ITC/segregatedFeesSite#readme",
+  "dependencies": {
+    "d3": "^5.5.0",
+    "express": "^4.16.3"
+  }
 }
