@@ -1,0 +1,19 @@
+{
+  "name": "segregatedfeessite",
+  "version": "1.0.0",
+  "description": "Front end for the segregated fees",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UWEC-ITC/segregatedFeesSite.git"
+  },
+  "author": "Alex Stout",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UWEC-ITC/segregatedFeesSite/issues"
+  },
+  "homepage": "https://github.com/UWEC-ITC/segregatedFeesSite#readme"
+}
