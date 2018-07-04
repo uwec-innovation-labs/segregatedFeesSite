@@ -13,5 +13,7 @@ deploy:
   access_key_id: AWS_KEY_ID
   secret_access_key: AWS_KEY_SECRET
   bucket: "uwec-segregated-fees"
+  region: "us-east-2"
+  local_dir: build
   skip_cleanup: true
   acl: public_read
