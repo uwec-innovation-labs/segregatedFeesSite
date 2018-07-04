@@ -3,7 +3,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'reactstrap';
 import BarChart from './components/BarChart'
-import TotalCost from './components/TotalCost'
 
 class App extends Component {
   render() {
