@@ -13,4 +13,3 @@ The framework used is React.js to serve a single page site.
 
 ### Data
 The data is provided via the Student Senate Finance Commission.
-g
