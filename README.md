@@ -1,5 +1,5 @@
 # segregatedFeesSite
-![logo](https://raw.githubusercontent.com/UWEC-ITC/segregatedFeesSite/master/public/favicon.ico =100x100)
+<img src="https://raw.githubusercontent.com/UWEC-ITC/segregatedFeesSite/master/public/favicon.ico" width="100" height="100"/>
 
 This is a site made with the intent of increasing awareness of the way the students' fees are being spent.
 
