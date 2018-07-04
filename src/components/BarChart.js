@@ -33,7 +33,7 @@ class BarChart extends Component {
           "Visual Arts",
           "Women's & LGBTQ Resource Center",
           "Athletics / Recreation Facilities Improvements",
-          "WUEC Radio",
+          "UWEC Radio",
           "Legal Services",
           "International Activities",
           "Spectator",
@@ -129,7 +129,8 @@ class BarChart extends Component {
               0.88,
               0
             ],
-            backgroundColor: '#FEDF03'
+            backgroundColor: '#FEDF03',
+            hidden: true
           },
           {
             label: '2016-17',
@@ -171,7 +172,8 @@ class BarChart extends Component {
               1.68,
               0
             ],
-            backgroundColor: '#00D49D'
+            backgroundColor: '#00D49D',
+            hidden: true
           },
           {
             label: '2015-16',
@@ -213,7 +215,8 @@ class BarChart extends Component {
               2.24,
               4.59
             ],
-            backgroundColor: '#0085B6'
+            backgroundColor: '#0085B6',
+            hidden:true
           },
         ]
       }
