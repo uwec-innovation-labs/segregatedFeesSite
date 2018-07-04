@@ -7,7 +7,7 @@ class BarChart extends Component {
     this.state = {
       chartData: {
         labels: [
-          "Student Center  (facility)",
+          "Davies Student Center",
           "University Centers",
           "University Recreation & Sports Facilities",
           "Student Health Service",
@@ -172,7 +172,7 @@ class BarChart extends Component {
               0
             ],
             backgroundColor: '#00D49D'
-          }, 
+          },
           {
             label: '2015-16',
             data: [
@@ -238,10 +238,11 @@ class BarChart extends Component {
           },
           tooltips: {
             enables: true,
-            mode: 'single',
             callbacks: {
-              lable: function(tooltipItems, data) {
-                return data.datasets[tooltipItems.datasetIndex] + ': $' + tooltipItems.yLable;
+              label: function(tooltipItems, data) {
+                console.log("TooltipItems: %O", tooltipItems);
+                console.log("DATA: %O", data);
+                return tooltipItems.yLabel + ': $' + tooltipItems.xLabel;
               }
             }
           }
