@@ -8,6 +8,8 @@ Develop: http://dev-uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
 
 Production: http://uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
 
+Trello Board: https://trello.com/b/RViZEIIl/uwec-itc
+
 ## How it works
 The framework used is React.js to serve a single page site.
 
