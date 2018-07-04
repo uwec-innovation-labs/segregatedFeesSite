@@ -16,7 +16,7 @@ class App extends Component {
 
           <h2>Segregated Fee Spending by Activity</h2>
           <BarChart/>
-          <TotalCost/>
+          //<TotalCost/>
         </div>
   );
   }
