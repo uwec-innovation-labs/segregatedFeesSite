@@ -5,6 +5,7 @@ This is a site made with the intent of increasing awareness of the way the stude
 
 ## Environments
 Develop: http://dev-uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
+
 Production: http://uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
 
 ## How it works
