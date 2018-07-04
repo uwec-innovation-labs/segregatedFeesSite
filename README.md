@@ -3,10 +3,12 @@
 
 This is a site made with the intent of increasing awareness of the way the students' fees are being spent.
 
+## Environments
+Develop: http://dev-uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
+Production: http://uwec-segregated-fees.s3-website.us-east-2.amazonaws.com/
+
 ## How it works
 The framework used is React.js to serve a single page site.
 
 ### Data
 The data is provided via the Student Senate Finance Commission.
-
-## Usage
