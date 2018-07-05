@@ -5,6 +5,10 @@ html {
   background-color: #303030;
 }
 
+img {
+  width: 100px;
+}
+
 .App {
   text-align: center;
   height: 100%;
@@ -28,13 +32,14 @@ header {
   margin: 4% auto;
   margin-bottom: 4%;
   margin-top: 10%;
-  width: 80%;
+  width: 90%;
   background-color: #424242;
 
 }
 
 .content>h3 {
-  color:
+  color: #E83E45;
+  margin-bottom: 15px;
 }
 
 .container {

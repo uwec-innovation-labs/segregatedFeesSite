@@ -5,13 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'reactstrap';
 import BarChart from './components/BarChart'
 
+import logo from './logo.png'
+
 class App extends Component {
   render() {
     return (
         <div className="App" height="100%">
-          <header>
-            <h1>UWEC Segregated Fee Report</h1>
-          </header>
+          <img src={logo} alt="logo"/>
+          <h2>UWEC Segregated Fee Report</h2>
           <div className="container">
             <div className="content">
               <h3>What are Segreated Fees?</h3>
