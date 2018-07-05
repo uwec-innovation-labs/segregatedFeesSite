@@ -9,8 +9,8 @@ class App extends Component {
     return (
         <div className="App">
           <h1>Student Senate Fee Report</h1>
-          <p>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</p>
-          <div class="container">
+          <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>
+          <div className="container">
             <h3>What are Segreated Fees?</h3>
             <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
           </div>
@@ -18,7 +18,6 @@ class App extends Component {
           <h2>Segregated Fee Spending by Activity</h2>
           <p><small>Click on the years to compare</small></p>
           <BarChart/>
-          // add in the table of the data
         </div>
   );
   }
