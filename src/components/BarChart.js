@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {HorizontalBar} from 'react-chartjs-2';
+import fetch from 'isomorphic-fetch';
 
 var colors = ['#E83E45', '#FEDF03', '#00D49D', '#0085B6']
 
@@ -52,10 +53,8 @@ class BarChart extends Component {
         this.state.chartData.datasets[1].data.push(data[i][2017])
         this.state.chartData.datasets[0].data.push(data[i][2018])
       }
-
       // now construct the datasets with data
       this.setState({ isLoaded: true })
-
     })
   }
 
