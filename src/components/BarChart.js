@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {HorizontalBar} from 'react-chartjs-2';
 
-var colors = ['#FF005D', '#FEDF03', '#00D49D', '#0085B6']
+var colors = ['#E83E45', '#FEDF03', '#00D49D', '#0085B6']
 
 class BarChart extends Component {
   constructor(props) {
@@ -67,12 +67,13 @@ class BarChart extends Component {
 
   render() {
     return (<div className="chart">
-      {this.state.isLoaded ? <HorizontalBar data={this.state.chartData} width={400} height={250} options={{
+      {this.state.isLoaded ? <HorizontalBar data={this.state.chartData} height={400} options={{
           legend: {
             display: this.props.displayLegend,
             position: this.props.legendPosition,
             labels: {
-              boxWidth: 40
+              boxWidth: 40,
+              fontColor: '#BDC7C1'
             }
           },
           tooltips: {
@@ -82,6 +83,14 @@ class BarChart extends Component {
                 return tooltipItems.yLabel + ': $' + tooltipItems.xLabel;
               }
             }
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                fontSize: 12,
+                fontColor: '#BDC7C1'
+              }
+            }]
           }
         }}/>
       : <div>Loading data...</div> }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { StickyContainer, Sticky } from 'react-sticky';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'reactstrap';
@@ -7,18 +8,26 @@ import BarChart from './components/BarChart'
 class App extends Component {
   render() {
     return (
-        <div className="App">
-          <h1>Student Senate Fee Report</h1>
-          <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>
+        <div className="App" height="100%">
+          <header>
+            <h1>UWEC Segregated Fee Report</h1>
+          </header>
           <div className="container">
-            <h3>What are Segreated Fees?</h3>
-            <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
+            <div className="content">
+              <h3>What are Segreated Fees?</h3>
+              <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
+            </div>
+            <h3>Segregated Fee Spending by Activity</h3>
+            <p><small>Click on the years to compare</small></p>
+            <BarChart/>
           </div>
-
-          <h2>Segregated Fee Spending by Activity</h2>
-          <p><small>Click on the years to compare</small></p>
-          <BarChart/>
+          <footer className="navbar-fixed-bottom">
+            <div className="container footer">
+              <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>
+            </div>
+          </footer>
         </div>
+
   );
   }
 }
