@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { StickyContainer, Sticky } from 'react-sticky';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'reactstrap';
 import BarChart from './components/BarChart'
+import PieChart from './components/PieChart'
 
 import logo from './logo.png'
 
@@ -21,6 +21,10 @@ class App extends Component {
             <h3>Segregated Fee Spending by Activity</h3>
             <p><small>Click on the years to compare</small></p>
             <BarChart/>
+            <h3 id="percentage">Spending as Percentage of Total</h3>
+            <div className="pieHolder">
+              <PieChart/>
+            </div>
           </div>
           <footer className="navbar-fixed-bottom">
             <div className="container footer">
