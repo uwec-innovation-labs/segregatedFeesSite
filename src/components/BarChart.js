@@ -44,11 +44,8 @@ class BarChart extends Component {
     .then(res => {
       return res.json();
     }).then(data => {
-
-      console.log(data);
       // extract the data for each year and the activity list
       for (var i = 0; i < data.length - 1; i++) {
-        console.log('adding ' + data[i].activity)
         this.state.chartData.labels.push(data[i].activity)
         this.state.chartData.datasets[3].data.push(data[i][2015])
         this.state.chartData.datasets[2].data.push(data[i][2016])
@@ -82,8 +79,6 @@ class BarChart extends Component {
             enables: true,
             callbacks: {
               label: function(tooltipItems, data) {
-                console.log("TooltipItems: %O", tooltipItems);
-                console.log("DATA: %O", data);
                 return tooltipItems.yLabel + ': $' + tooltipItems.xLabel;
               }
             }
