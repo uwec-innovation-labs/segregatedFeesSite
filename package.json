@@ -11,6 +11,7 @@
     "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
+    "react-sticky": "^6.0.3",
     "reactstrap": "^6.2.0"
   },
   "scripts": {
