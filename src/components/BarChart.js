@@ -17,11 +17,8 @@ class BarChart extends Component {
 
   render() {
     return (<div className="chart">
-<<<<<<< Updated upstream
-      {this.state.isLoaded ? <HorizontalBar data={this.state.chartData} height={400} options={{
-=======
+
     <HorizontalBar data={this.state.chartData} height={500} options={{
->>>>>>> Stashed changes
           legend: {
             display: this.props.displayLegend,
             position: this.props.legendPosition,
