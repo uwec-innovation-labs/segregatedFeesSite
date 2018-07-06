@@ -75,37 +75,16 @@ class App extends Component {
       'Readership Program',
       'CASE'
     ]
-    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
-    .then(res => {
-      return res.json();
-    }).then(data => {
-      // clear the state
-      this.state.barChartData.labels = [];
-      this.state.barChartData.datasets[3].data = []
-      this.state.barChartData.datasets[2].data = []
-      this.state.barChartData.datasets[1].data = []
-      this.state.barChartData.datasets[0].data = []
+    this.getBarChartData().then(() => {
 
-      // extract the data for each year and the activity list
-      for (var i = 0; i < data.length - 1; i++) {
-        this.state.barChartData.labels.push(data[i].activity)
-        this.state.barChartData.datasets[3].data.push(data[i][2015])
-        this.state.barChartData.datasets[2].data.push(data[i][2016])
-        this.state.barChartData.datasets[1].data.push(data[i][2017])
-        this.state.barChartData.datasets[0].data.push(data[i][2018])
-      }
-      
       for (var i = 0; i < allocables.length; i++) {
         var index = this.state.barChartData.labels.indexOf(allocables[i]);
         if (index > -1) {
-          console.log("Found a match for " + allocables[i])
           // pop off label, 2015, 2016, 2017, 2018
-          console.log('Removing label' + this.state.barChartData.labels.splice(index, 1));
+          this.state.barChartData.labels.splice(index, 1)
           this.state.barChartData.datasets.forEach((dataset) => {
-            console.log("Removing " + dataset.data.splice(index, 1) + " dataset.");
+            dataset.data.splice(index, 1)
           })
-        } else {
-          console.log(allocables[i] + " didn't match " + this.state.barChartData.labels[index])
         }
       }
       this.setState({ isLoaded: true });
@@ -128,37 +107,15 @@ class App extends Component {
       'Children\'s Nature Academy',
       'Children\'s Nature Academy Building'
     ]
-    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
-    .then(res => {
-      return res.json();
-    }).then(data => {
-      // clear the state
-      this.state.barChartData.labels = [];
-      this.state.barChartData.datasets[3].data = []
-      this.state.barChartData.datasets[2].data = []
-      this.state.barChartData.datasets[1].data = []
-      this.state.barChartData.datasets[0].data = []
-
-      // extract the data for each year and the activity list
-      for (var i = 0; i < data.length - 1; i++) {
-        this.state.barChartData.labels.push(data[i].activity)
-        this.state.barChartData.datasets[3].data.push(data[i][2015])
-        this.state.barChartData.datasets[2].data.push(data[i][2016])
-        this.state.barChartData.datasets[1].data.push(data[i][2017])
-        this.state.barChartData.datasets[0].data.push(data[i][2018])
-      }
-
+    this.getBarChartData().then(() => {
       for (var i = 0; i < nonallocables.length; i++) {
         var index = this.state.barChartData.labels.indexOf(nonallocables[i]);
         if (index > -1) {
-          console.log("Found a match for " + nonallocables[i])
           // pop off label, 2015, 2016, 2017, 2018
-          console.log('Removing label' + this.state.barChartData.labels.splice(index, 1));
+          this.state.barChartData.labels.splice(index, 1)
           this.state.barChartData.datasets.forEach((dataset) => {
-            console.log("Removing " + dataset.data.splice(index, 1) + " dataset.");
+            dataset.data.splice(index, 1)
           })
-        } else {
-          console.log(nonallocables[i] + " didn't match " + this.state.barChartData.labels[index])
         }
       }
       this.setState({ isLoaded: true });
@@ -170,7 +127,7 @@ class App extends Component {
 
   getBarChartData() {
     // AJAX call
-    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
+    return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
     .then(res => {
       return res.json();
     }).then(data => {
@@ -199,6 +156,9 @@ class App extends Component {
   }
 
   render() {
+    const filterAllocable = () => this.filter('allocable')
+    const filterNonAllocable = () => this.filter('nonallocable')
+    const resetFilter = () => this.filter('')
     return (
         <div className="App" height="100%">
           <img src={logo} alt="logo"/>
