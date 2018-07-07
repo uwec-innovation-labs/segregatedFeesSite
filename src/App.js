@@ -22,6 +22,26 @@ class App extends Component {
     super(props);
     this.state = {
       rawData: null,
+      pieChartData: {
+        labels: [],
+        datasets: [{
+          data: [],
+          backgroundColor: [
+            '#E83E45',
+            '#FEDF03',
+            '#00D49D',
+            '#0085B6',
+            '#9B176A',
+            '#B5601B',
+            '#7252EC',
+            '#E87F00',
+            '#789B6E',
+            '#3C539B',
+            '#9CB51E',
+            '#FFFFFF'
+          ]
+        }]
+      },
       barChartData: {
         labels: [],
         datasets: [
@@ -49,7 +69,6 @@ class App extends Component {
             hidden: true
           },
         ]},
-      pieChartData: {}
     }
   }
 
@@ -86,16 +105,22 @@ class App extends Component {
       })
     }
     // make copy of the state
-    let stateCopy = this.state.barChartData
+    let stateCopy = this.state
 
-    stateCopy.datasets[0].data = data2018
-    stateCopy.datasets[1].data = data2017
-    stateCopy.datasets[2].data = data2016
-    stateCopy.datasets[3].data = data2015
-    stateCopy.labels = updatedLabels
+    // set the bar chart state
+    stateCopy.barChartData.datasets[0].data = data2018
+    stateCopy.barChartData.datasets[1].data = data2017
+    stateCopy.barChartData.datasets[2].data = data2016
+    stateCopy.barChartData.datasets[3].data = data2015
+    stateCopy.barChartData.labels = updatedLabels
+
+    // set the pie chart state
+    stateCopy.pieChartData.labels = updatedLabels
+    stateCopy.pieChartData.datasets[0].data = data2018
+
 
     this.setState({
-      barChartData: stateCopy
+      stateCopy
     })
   }
 
@@ -127,10 +152,10 @@ class App extends Component {
             <button type="button" className="btn btn-outline-danger" onClick={filterAllocable.bind(this)}>Allocable</button>
             <button type="button" className="btn btn-outline-danger" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
             <p><small>Click on the years to compare</small></p>
-            <BarChart redraw={true} chartData={this.state.barChartData}/>
+            <BarChart chartData={this.state.barChartData}/>
             <h3 id="percentage">Spending as Percentage of Total</h3>
             <div className="pieHolder">
-              <PieChart/>
+              <PieChart chartData={this.state.pieChartData}/>
             </div>
           </div>
           <footer className="navbar-fixed-bottom">
@@ -139,7 +164,6 @@ class App extends Component {
             </div>
           </footer>
         </div>
-
   );
   }
 }

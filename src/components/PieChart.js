@@ -6,60 +6,8 @@ class PieChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoaded: false,
-      chartData: {
-        labels: [],
-        datasets: [{
-          data: [],
-          backgroundColor: [
-            '#E83E45',
-            '#FEDF03',
-            '#00D49D',
-            '#0085B6',
-            '#9B176A',
-            '#B5601B',
-            '#7252EC',
-            '#E87F00',
-            '#789B6E',
-            '#3C539B',
-            '#9CB51E',
-            '#FFFFFF'
-          ]
-        }]
-      },
+      chartData: props.chartData
     }
-  }
-
-  /**
-  * For this pie chart take the top 9 and lump the rest as "Others"
-  **/
-  componentDidMount() {
-    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
-    .then(res => {
-      return res.json();
-    }).then(data => {
-      // extract the data for each year and the activity list
-      var other = 0;
-
-      data.pop();
-
-      for (var i = 0; i < data.length; i++) {
-        if (i < 11) {
-          this.state.chartData.labels.push(data[i].activity);
-          this.state.chartData.datasets[0].data.push(data[i][2018]);
-        } else {
-          other += parseInt(data[i][2018], 10)
-          if (i === data.length - 1) {
-            this.state.chartData.labels.push('Others')
-            this.state.chartData.datasets[0].data.push(other)
-          }
-        }
-      }
-
-        // now construct the datasets with data
-        this.setState({ isLoaded: true })
-
-    })
   }
 
   static defaultProps = {
