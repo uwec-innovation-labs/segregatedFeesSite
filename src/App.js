@@ -17,6 +17,11 @@ const getData = () => {
   })
 }
 
+const getRandomColor = () => {
+  var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+  return randomColor
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -78,8 +83,8 @@ class App extends Component {
     var data2017 = []
     var data2016 = []
     var data2015 = []
+    var pieColors = []
     if (type == null) {
-      console.log('Reset')
       //console.log(this.state.rawData)
       this.state.rawData.forEach((item) => {
         //console.log(JSON.stringify(item, null, 4))
@@ -88,6 +93,7 @@ class App extends Component {
         data2017.push(item[2017])
         data2016.push(item[2016])
         data2015.push(item[2015])
+        pieColors.push(getRandomColor())
       })
 
 
@@ -101,11 +107,13 @@ class App extends Component {
           data2017.push(item[2017])
           data2016.push(item[2016])
           data2015.push(item[2015])
+          pieColors.push(getRandomColor())
         }
       })
     }
     // make copy of the state
     let stateCopy = this.state
+    console.log(pieColors)
 
     // set the bar chart state
     stateCopy.barChartData.datasets[0].data = data2018
@@ -117,6 +125,7 @@ class App extends Component {
     // set the pie chart state
     stateCopy.pieChartData.labels = updatedLabels
     stateCopy.pieChartData.datasets[0].data = data2018
+    stateCopy.pieChartData.datasets[0].backgroundColor = pieColors
 
 
     this.setState({
