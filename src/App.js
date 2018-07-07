@@ -10,11 +10,38 @@ import logo from './logo.png'
 
 var barColors = ['#E83E45', '#FEDF03', '#00D49D', '#0085B6']
 
+const getData = () => {
+  return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
+  .then(res => {
+    return res.json()
+  })
+}
+
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      rawData: {},
+      rawData: null,
+      pieChartData: {
+        labels: [],
+        datasets: [{
+          data: [],
+          backgroundColor: [
+            '#E83E45',
+            '#FEDF03',
+            '#00D49D',
+            '#0085B6',
+            '#9B176A',
+            '#B5601B',
+            '#7252EC',
+            '#E87F00',
+            '#789B6E',
+            '#3C539B',
+            '#9CB51E',
+            '#FFFFFF'
+          ]
+        }]
+      },
       barChartData: {
         labels: [],
         datasets: [
@@ -42,123 +69,75 @@ class App extends Component {
             hidden: true
           },
         ]},
-      pieChartData: {}
     }
   }
 
-  filterNonAllocable(e) {
-    // TO-DO replace with API call sourced from data.csv
-    var allocables = [
-      'Music',
-      'Student Office of Sustainability',
-      'Student Senate General Operations',
-      'Theatre',
-      'Intramurals',
-      'University Activities Commission',
-      'Club Sports',
-      'Forum',
-      'Artist Series',
-      'Forensics',
-      'Student Organizations',
-      'Visual Arts',
-      'Women\'s & LGBTQ Resource Center',
-      'Athletics / Recreation Facilities Improvements',
-      'UWEC Radio',
-      'Legal Services',
-      'International Activities',
-      'Spectator',
-      'Organized Activities Reserve',
-      'Pow Wow',
-      'NOTA',
-      'Flip Side',
-      'International Films',
-      'Readership Program',
-      'CASE'
-    ]
-    this.getBarChartData().then(() => {
+  filter (type) {
+    var updatedLabels = []
+    var data2018 = []
+    var data2017 = []
+    var data2016 = []
+    var data2015 = []
+    if (type == null) {
+      console.log('Reset')
+      //console.log(this.state.rawData)
+      this.state.rawData.forEach((item) => {
+        //console.log(JSON.stringify(item, null, 4))
+        updatedLabels.push(item.activity)
+        data2018.push(item[2018])
+        data2017.push(item[2017])
+        data2016.push(item[2016])
+        data2015.push(item[2015])
+      })
 
-      for (var i = 0; i < allocables.length; i++) {
-        var index = this.state.barChartData.labels.indexOf(allocables[i]);
-        if (index > -1) {
-          // pop off label, 2015, 2016, 2017, 2018
-          this.state.barChartData.labels.splice(index, 1)
-          this.state.barChartData.datasets.forEach((dataset) => {
-            dataset.data.splice(index, 1)
-          })
+
+    } else {
+      var allocable = type === "allocable"
+      this.state.rawData.forEach((item) => {
+        var boolVal = item.allocable === "true"
+        if (boolVal === allocable) {
+          updatedLabels.push(item.activity)
+          data2018.push(item[2018])
+          data2017.push(item[2017])
+          data2016.push(item[2016])
+          data2015.push(item[2015])
         }
-      }
-      this.setState({ isLoaded: true });
-    })
+      })
+    }
+    // make copy of the state
+    let stateCopy = this.state
 
-}
+    // set the bar chart state
+    stateCopy.barChartData.datasets[0].data = data2018
+    stateCopy.barChartData.datasets[1].data = data2017
+    stateCopy.barChartData.datasets[2].data = data2016
+    stateCopy.barChartData.datasets[3].data = data2015
+    stateCopy.barChartData.labels = updatedLabels
 
-  filterAllocable(e) {
-    // TO-DO replace with API call sourced from data.csv
-    var nonallocables = [
-      'Davies Student Center',
-      'University Centers',
-      'University Recreation & Sports Facilities',
-      'Student Health Service',
-      'Text Rental',
-      'Athletics',
-      'Municipal Services',
-      'Transit',
-      'Counseling Services',
-      'Children\'s Nature Academy',
-      'Children\'s Nature Academy Building'
-    ]
-    this.getBarChartData().then(() => {
-      for (var i = 0; i < nonallocables.length; i++) {
-        var index = this.state.barChartData.labels.indexOf(nonallocables[i]);
-        if (index > -1) {
-          // pop off label, 2015, 2016, 2017, 2018
-          this.state.barChartData.labels.splice(index, 1)
-          this.state.barChartData.datasets.forEach((dataset) => {
-            dataset.data.splice(index, 1)
-          })
-        }
-      }
-      this.setState({ isLoaded: true });
-      // now construct the datasets with data
-      this.setState({ isLoaded: true })
-    })
+    // set the pie chart state
+    stateCopy.pieChartData.labels = updatedLabels
+    stateCopy.pieChartData.datasets[0].data = data2018
 
-}
 
-  getBarChartData() {
-    // AJAX call
-    return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
-    .then(res => {
-      return res.json();
-    }).then(data => {
-      // clear the state
-      this.state.barChartData.labels = [];
-      this.state.barChartData.datasets[3].data = []
-      this.state.barChartData.datasets[2].data = []
-      this.state.barChartData.datasets[1].data = []
-      this.state.barChartData.datasets[0].data = []
-
-      // extract the data for each year and the activity list
-      for (var i = 0; i < data.length - 1; i++) {
-        this.state.barChartData.labels.push(data[i].activity)
-        this.state.barChartData.datasets[3].data.push(data[i][2015])
-        this.state.barChartData.datasets[2].data.push(data[i][2016])
-        this.state.barChartData.datasets[1].data.push(data[i][2017])
-        this.state.barChartData.datasets[0].data.push(data[i][2018])
-      }
-      // now construct the datasets with data
-      this.setState({ isLoaded: true })
+    this.setState({
+      stateCopy
     })
   }
 
-  componentWillMount() {
-    this.getBarChartData();
+  componentDidMount() {
+    getData().then(res => {
+      this.setState({
+        rawData: res
+      })
+      this.filter(null)
+    })
   }
 
   render() {
     const filterAllocable = () => this.filter('allocable')
     const filterNonAllocable = () => this.filter('nonallocable')
-    const resetFilter = () => this.filter('')
+    const resetFilter = () => this.filter(null)
+
     return (
         <div className="App" height="100%">
           <img src={logo} alt="logo"/>
@@ -169,14 +148,14 @@ class App extends Component {
               <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
             </div>
             <h3>Segregated Fee Spending by Activity</h3>
-            <button  type="button" className="btn btn-outline-danger" onClick={this.getBarChartData.bind(this)}>All</button>
-            <button type="button" className="btn btn-outline-danger" onClick={this.filterAllocable.bind(this)}>Allocable</button>
-            <button type="button" className="btn btn-outline-danger" onClick={this.filterNonAllocable.bind(this)}>Non-Allocable</button>
+            <button  type="button" className="btn btn-outline-danger" onClick={resetFilter.bind(this)}>All</button>
+            <button type="button" className="btn btn-outline-danger" onClick={filterAllocable.bind(this)}>Allocable</button>
+            <button type="button" className="btn btn-outline-danger" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
             <p><small>Click on the years to compare</small></p>
-            <BarChart redraw={true} chartData={this.state.barChartData}/>
+            <BarChart chartData={this.state.barChartData}/>
             <h3 id="percentage">Spending as Percentage of Total</h3>
             <div className="pieHolder">
-              <PieChart/>
+              <PieChart chartData={this.state.pieChartData}/>
             </div>
           </div>
           <footer className="navbar-fixed-bottom">
@@ -185,7 +164,6 @@ class App extends Component {
             </div>
           </footer>
         </div>
-
   );
   }
 }
