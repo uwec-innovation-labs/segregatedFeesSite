@@ -127,7 +127,7 @@ class App extends Component {
 
   getBarChartData() {
     // AJAX call
-    return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
+    return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
     .then(res => {
       return res.json();
     }).then(data => {
