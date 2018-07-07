@@ -35,9 +35,10 @@ class App extends Component {
             '#34495e',
             '#e67e22',
             '#c0392b',
-            '#ecf0f1',
+            '#7A942E',
+            '#4834d4',
             '#1abc9c',
-            '#95a5a6'
+            '#BDC3C7'
           ]
         }]
       },
@@ -116,7 +117,7 @@ class App extends Component {
     var aggregatedLabels = []
 
     for (var i = 0; i < updatedLabels.length; i++) {
-      if (i < 10) {
+      if (i < 11) {
         aggregatedData.push(data2018[i])
         aggregatedLabels.push(updatedLabels[i])
       } else {
