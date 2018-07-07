@@ -34,7 +34,7 @@ class PieChart extends Component {
   * For this pie chart take the top 9 and lump the rest as "Others"
   **/
   componentDidMount() {
-    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/v0')
+    fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
     .then(res => {
       return res.json();
     }).then(data => {
