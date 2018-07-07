@@ -14,7 +14,7 @@ img {
   text-align: center;
   height: 100%;
   background-color: #303030;
-  color: #E83E45;
+  color: #e74c3c;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300
 }
@@ -30,7 +30,7 @@ img {
 }
 
 .content>h3 {
-  color: #E83E45;
+  color: #e74c3c;
   margin-bottom: 15px;
 }
 

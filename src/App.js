@@ -8,18 +8,13 @@ import PieChart from './components/PieChart'
 
 import logo from './logo.png'
 
-var barColors = ['#E83E45', '#FEDF03', '#00D49D', '#0085B6']
+var barColors = ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db']
 
 const getData = () => {
   return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
   .then(res => {
     return res.json()
   })
-}
-
-const getRandomColor = () => {
-  var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-  return randomColor
 }
 
 class App extends Component {
@@ -32,18 +27,17 @@ class App extends Component {
         datasets: [{
           data: [],
           backgroundColor: [
-            '#E83E45',
-            '#FEDF03',
-            '#00D49D',
-            '#0085B6',
-            '#9B176A',
-            '#B5601B',
-            '#7252EC',
-            '#E87F00',
-            '#789B6E',
-            '#3C539B',
-            '#9CB51E',
-            '#FFFFFF'
+            '#e74c3c',
+            '#f1c40f',
+            '#2ecc71',
+            '#3498db',
+            '#9b59b6',
+            '#34495e',
+            '#e67e22',
+            '#c0392b',
+            '#ecf0f1',
+            '#1abc9c',
+            '#95a5a6'
           ]
         }]
       },
@@ -83,7 +77,6 @@ class App extends Component {
     var data2017 = []
     var data2016 = []
     var data2015 = []
-    var pieColors = []
     if (type == null) {
       //console.log(this.state.rawData)
       this.state.rawData.forEach((item) => {
@@ -93,9 +86,7 @@ class App extends Component {
         data2017.push(item[2017])
         data2016.push(item[2016])
         data2015.push(item[2015])
-        pieColors.push(getRandomColor())
       })
-
 
     } else {
       var allocable = type === "allocable"
@@ -107,13 +98,11 @@ class App extends Component {
           data2017.push(item[2017])
           data2016.push(item[2016])
           data2015.push(item[2015])
-          pieColors.push(getRandomColor())
         }
       })
     }
     // make copy of the state
     let stateCopy = this.state
-    console.log(pieColors)
 
     // set the bar chart state
     stateCopy.barChartData.datasets[0].data = data2018
@@ -122,11 +111,26 @@ class App extends Component {
     stateCopy.barChartData.datasets[3].data = data2015
     stateCopy.barChartData.labels = updatedLabels
 
-    // set the pie chart state
-    stateCopy.pieChartData.labels = updatedLabels
-    stateCopy.pieChartData.datasets[0].data = data2018
-    stateCopy.pieChartData.datasets[0].backgroundColor = pieColors
+    var others = 0
+    var aggregatedData = []
+    var aggregatedLabels = []
 
+    for (var i = 0; i < updatedLabels.length; i++) {
+      if (i < 10) {
+        aggregatedData.push(data2018[i])
+        aggregatedLabels.push(updatedLabels[i])
+      } else {
+        others += parseInt(data2018[i], 10)
+        if (i === updatedLabels.length - 1) {
+          aggregatedData.push(others)
+          aggregatedLabels.push("Others")
+        }
+      }
+    }
+
+    stateCopy.pieChartData.labels = aggregatedLabels
+    stateCopy.pieChartData.datasets[0].data = aggregatedData
+    console.log(stateCopy.pieChartData)
 
     this.setState({
       stateCopy
