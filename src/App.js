@@ -8,7 +8,7 @@ import PieChart from './components/PieChart'
 
 import logo from './logo.png'
 
-var barColors = ['#E83E45', '#FEDF03', '#00D49D', '#0085B6']
+var barColors = ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db']
 
 const getData = () => {
   return fetch('https://3b6gdit4v0.execute-api.us-east-2.amazonaws.com/latest/')
@@ -27,18 +27,18 @@ class App extends Component {
         datasets: [{
           data: [],
           backgroundColor: [
-            '#E83E45',
-            '#FEDF03',
-            '#00D49D',
-            '#0085B6',
-            '#9B176A',
-            '#B5601B',
-            '#7252EC',
-            '#E87F00',
-            '#789B6E',
-            '#3C539B',
-            '#9CB51E',
-            '#FFFFFF'
+            '#e74c3c',
+            '#f1c40f',
+            '#2ecc71',
+            '#3498db',
+            '#9b59b6',
+            '#34495e',
+            '#e67e22',
+            '#c0392b',
+            '#7A942E',
+            '#4834d4',
+            '#1abc9c',
+            '#BDC3C7'
           ]
         }]
       },
@@ -79,7 +79,6 @@ class App extends Component {
     var data2016 = []
     var data2015 = []
     if (type == null) {
-      console.log('Reset')
       //console.log(this.state.rawData)
       this.state.rawData.forEach((item) => {
         //console.log(JSON.stringify(item, null, 4))
@@ -89,7 +88,6 @@ class App extends Component {
         data2016.push(item[2016])
         data2015.push(item[2015])
       })
-
 
     } else {
       var allocable = type === "allocable"
@@ -114,10 +112,25 @@ class App extends Component {
     stateCopy.barChartData.datasets[3].data = data2015
     stateCopy.barChartData.labels = updatedLabels
 
-    // set the pie chart state
-    stateCopy.pieChartData.labels = updatedLabels
-    stateCopy.pieChartData.datasets[0].data = data2018
+    var others = 0
+    var aggregatedData = []
+    var aggregatedLabels = []
 
+    for (var i = 0; i < updatedLabels.length; i++) {
+      if (i < 11) {
+        aggregatedData.push(data2018[i])
+        aggregatedLabels.push(updatedLabels[i])
+      } else {
+        others += parseInt(data2018[i], 10)
+        if (i === updatedLabels.length - 1) {
+          aggregatedData.push(others)
+          aggregatedLabels.push("Others")
+        }
+      }
+    }
+
+    stateCopy.pieChartData.labels = aggregatedLabels
+    stateCopy.pieChartData.datasets[0].data = aggregatedData
 
     this.setState({
       stateCopy
@@ -147,21 +160,20 @@ class App extends Component {
               <h3>What are Segreated Fees?</h3>
               <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
             </div>
+            <button  type="button" className="btn btn-outline-danger btn-space" onClick={resetFilter.bind(this)}>All</button>
+            <button type="button" className="btn btn-outline-danger btn-space" onClick={filterAllocable.bind(this)}>Allocable</button>
+            <button type="button" className="btn btn-outline-danger btn-space" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
+            <h3 id="percentage">Spending as Percentage of Total</h3>
+              <div className="pieHolder">
+                <PieChart chartData={this.state.pieChartData}/>
+            </div>
             <h3>Segregated Fee Spending by Activity</h3>
-            <button  type="button" className="btn btn-outline-danger" onClick={resetFilter.bind(this)}>All</button>
-            <button type="button" className="btn btn-outline-danger" onClick={filterAllocable.bind(this)}>Allocable</button>
-            <button type="button" className="btn btn-outline-danger" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
             <p><small>Click on the years to compare</small></p>
             <BarChart chartData={this.state.barChartData}/>
-            <h3 id="percentage">Spending as Percentage of Total</h3>
-            <div className="pieHolder">
-              <PieChart chartData={this.state.pieChartData}/>
-            </div>
+
           </div>
           <footer className="navbar-fixed-bottom">
-            <div className="container footer">
               <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>
-            </div>
           </footer>
         </div>
   );

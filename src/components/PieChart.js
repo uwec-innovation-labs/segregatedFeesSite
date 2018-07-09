@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Pie } from 'react-chartjs-2';
-import fetch from 'isomorphic-fetch';
 
 class PieChart extends Component {
   constructor(props) {
