@@ -131,7 +131,6 @@ class App extends Component {
 
     stateCopy.pieChartData.labels = aggregatedLabels
     stateCopy.pieChartData.datasets[0].data = aggregatedData
-    console.log(stateCopy.pieChartData)
 
     this.setState({
       stateCopy
@@ -161,21 +160,20 @@ class App extends Component {
               <h3>What are Segreated Fees?</h3>
               <p>Segregated fees provide funds for cultural, recreational, and leisure activities and groups that are not funded through other state appropriations. They are intended to contribute to the richness of the university community. Segregated fees are not user fees. </p>
             </div>
+            <button  type="button" className="btn btn-outline-danger btn-space" onClick={resetFilter.bind(this)}>All</button>
+            <button type="button" className="btn btn-outline-danger btn-space" onClick={filterAllocable.bind(this)}>Allocable</button>
+            <button type="button" className="btn btn-outline-danger btn-space" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
+            <h3 id="percentage">Spending as Percentage of Total</h3>
+              <div className="pieHolder">
+                <PieChart chartData={this.state.pieChartData}/>
+            </div>
             <h3>Segregated Fee Spending by Activity</h3>
-            <button  type="button" className="btn btn-outline-danger" onClick={resetFilter.bind(this)}>All</button>
-            <button type="button" className="btn btn-outline-danger" onClick={filterAllocable.bind(this)}>Allocable</button>
-            <button type="button" className="btn btn-outline-danger" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
             <p><small>Click on the years to compare</small></p>
             <BarChart chartData={this.state.barChartData}/>
-            <h3 id="percentage">Spending as Percentage of Total</h3>
-            <div className="pieHolder">
-              <PieChart chartData={this.state.pieChartData}/>
-            </div>
+
           </div>
           <footer className="navbar-fixed-bottom">
-            <div className="container footer">
               <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>
-            </div>
           </footer>
         </div>
   );
