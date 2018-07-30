@@ -163,14 +163,19 @@ class App extends Component {
             <button  type="button" className="btn btn-outline-danger btn-space" onClick={resetFilter.bind(this)}>All</button>
             <button type="button" className="btn btn-outline-danger btn-space" onClick={filterAllocable.bind(this)}>Allocable</button>
             <button type="button" className="btn btn-outline-danger btn-space" onClick={filterNonAllocable.bind(this)}>Non-Allocable</button>
+          </div>
+          <div className="box">
             <h3 id="percentage">Spending as Percentage of Total</h3>
               <div className="pieHolder">
                 <PieChart chartData={this.state.pieChartData}/>
-            </div>
+              </div>
+          </div>
+          <div className="box">
             <h3>Segregated Fee Spending by Activity</h3>
             <p><small>Click on the years to compare</small></p>
-            <BarChart chartData={this.state.barChartData}/>
-
+            <div className="barHolder">
+              <BarChart chartData={this.state.barChartData}/>
+            </div>
           </div>
           <footer className="navbar-fixed-bottom">
               <p><small>This page is brought to you by UWEC Student Senate as a collaboration between the Finance and Information Technology Comissions.</small></p>

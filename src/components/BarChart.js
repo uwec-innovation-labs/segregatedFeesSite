@@ -18,7 +18,7 @@ class BarChart extends Component {
   render() {
     return (<div className="chart">
 
-    <HorizontalBar data={this.state.chartData} height={500} options={{
+    <HorizontalBar data={this.state.chartData} height={400} options={{
           legend: {
             display: this.props.displayLegend,
             position: this.props.legendPosition,
@@ -27,6 +27,8 @@ class BarChart extends Component {
               fontColor: '#BDC7C1'
             }
           },
+          maintainAspectRatio: false,
+          responsive: true,
           tooltips: {
             enables: true,
             callbacks: {

@@ -19,6 +19,11 @@ img {
   font-weight: 300
 }
 
+.box {
+  display: inline-block;
+  width: 50%;
+}
+
 .btn-space {
   margin-right: 15px;
 }
@@ -48,6 +53,10 @@ small {
 
 .pieHolder {
   margin-top: 4%;
+}
+
+.barHolder {
+  height: 400px;
 }
 
 footer {
